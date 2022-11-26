@@ -7,6 +7,8 @@ from inference import convert_video
 from model import MattingNetwork
 import torch
 
+from powerpoint import cov_ppt
+
 os.environ['CUDA_VISIBLE_DEVICES'] = str(0)
 
 model_matting = MattingNetwork('mobilenetv3').eval().cuda()
@@ -14,6 +16,10 @@ model_matting.load_state_dict(torch.load('rvm_mobilenetv3.pth'))
 
 
 def avatar_pro(videos, powerpoint):
+
+    ppt_path = powerpoint.name
+    video_path = 'E:\\Code\\Software Engineer\\ppt.mp4'
+    cov_ppt(ppt_path, video_path)
 
     convert_video(
         model_matting,  # 模型，可以加载到任何设备（cpu 或 cuda）
@@ -27,7 +33,7 @@ def avatar_pro(videos, powerpoint):
         seq_chunk=6,  # 设置多帧并行计算
     )
 
-    return 'com.mp4'
+    return video_path
 
 
 def avatar_lite(image, text, powerpoint):
