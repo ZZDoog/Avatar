@@ -6,8 +6,10 @@ import numpy as np
 from inference import convert_video
 from model import MattingNetwork
 import torch
+import cv2 as cv
 
 from powerpoint import cov_ppt
+from videos import video_merge
 
 os.environ['CUDA_VISIBLE_DEVICES'] = str(0)
 
@@ -17,15 +19,18 @@ model_matting.load_state_dict(torch.load('rvm_mobilenetv3.pth'))
 
 def avatar_pro(videos, powerpoint):
 
+    print('Processing ppt file.......')
     ppt_path = powerpoint.name
-    video_path = 'E:\\Code\\Software Engineer\\ppt.mp4'
-    cov_ppt(ppt_path, video_path)
+    ppt_video_path = 'E:\\Code\\Software Engineer\\ppt.mp4'
+    com_video_path = 'E:\\Code\\Avatar\\com.mp4'
+    cov_ppt(ppt_path, ppt_video_path)
 
+    print('Processing video file........')
     convert_video(
         model_matting,  # 模型，可以加载到任何设备（cpu 或 cuda）
         input_source=videos,  # 视频文件，或图片序列文件夹
         output_type='video',  # 可选 "video"（视频）或 "png_sequence"（PNG 序列）
-        output_composition='com.mp4',  # 若导出视频，提供文件路径。若导出 PNG 序列，提供文件夹路径
+        output_composition=com_video_path,  # 若导出视频，提供文件路径。若导出 PNG 序列，提供文件夹路径
         output_alpha="pha.mp4",  # [可选项] 输出透明度预测
         output_foreground="fgr.mp4",  # [可选项] 输出前景预测
         output_video_mbps=4,  # 若导出视频，提供视频码率
@@ -33,7 +38,11 @@ def avatar_pro(videos, powerpoint):
         seq_chunk=6,  # 设置多帧并行计算
     )
 
-    return video_path
+    print('Merging........')
+    merge_video = video_merge(ppt_video_path, com_video_path)
+
+    return merge_video
+    #  return 'E:\\Code\\Avatar\\merge.mp4'
 
 
 def avatar_lite(image, text, powerpoint):
