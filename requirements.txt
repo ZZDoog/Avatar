@@ -1,0 +1,9 @@
+# assume the torch, opencv-python is already satisfied
+
+# for robust video matting
+av
+tqdm
+pims
+
+# for ppt to video
+pywin32

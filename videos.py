@@ -1,16 +1,16 @@
+# 视频融合文件
+
 import cv2 as cv
 
-ppt_video = 'E:\\Code\\Software Engineer\\ppt.mp4'
-talk_video = 'E:\\Code\\Avatar\\com.mp4'
-
-
 def frame_merge(ppt_frame, talk_frame):
-    talk_frame = cv.resize(talk_frame, (480, 270))
+    merge_width = 338
+    merge_height = 250
+    talk_frame = cv.resize(talk_frame, (merge_width, merge_height))
 
     # I want to put logo on top-left corner, So I create a ROI
     # 首先获取原始图像roi
     rows, cols, channels = talk_frame.shape
-    roi = ppt_frame[450:450 + rows, 0:cols]
+    roi = ppt_frame[720-merge_height:720, 0:cols]
 
     # 原始图像转化为灰度值
     # Now create a mask of logo and create its inverse mask also
@@ -50,7 +50,7 @@ def frame_merge(ppt_frame, talk_frame):
     # Put logo in ROI and modify the main image
 
     dst = cv.add(img1_bg, img2_fg)
-    ppt_frame[450:450 + rows, 0:cols] = dst
+    ppt_frame[720-merge_height:720, 0:cols] = dst
 
     # cv.imshow('res', ppt_frame)
     # cv.waitKey(0)
@@ -63,7 +63,7 @@ def video_merge(ppt_video, talk_video):
     cap_ppt = cv.VideoCapture(ppt_video)
     cap_talk = cv.VideoCapture(talk_video)
 
-    merge_video = 'merge.mp4'
+    merge_video = 'E:\\Code\\Software Engineer\\merge.mp4'
     # fourcc = cv.VideoWriter_fourcc(*'XVID')
     fourcc = cv.VideoWriter_fourcc('H', '2', '6', '4')
     video_writer = cv.VideoWriter(merge_video, fourcc, 20.0, (1280, 720))
@@ -90,5 +90,8 @@ def video_merge(ppt_video, talk_video):
     cv.destroyAllWindows()
 
     return merge_video
+
+
+
 
 
