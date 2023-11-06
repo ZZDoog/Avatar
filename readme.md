@@ -2,17 +2,17 @@
 
 Avatar is an easy-to-use system which can transfer your presentation video to a digital portrait with the input PPT and synthesis the final presentation video based on Gradio Framework.
 
-<video src="image/11%E6%9C%886%E6%97%A5.mp4" controls title="Title"></video>
+<video src="./image/demo.mp4" controls title="Title"></video>
 
 The illustration of Avatar as followed:
 
-![img1.png](image\img1.png)
+![img1.png](./image/img1.png)
 
 The Avatar System contains two mode, Pro and Lite, Currently, only Pro mode is supported, the Lite model is comming soon.
 
 The UI of Avatar System are shown as follows:
 
-![UI.png](image\UI.png)
+![UI.png](./image/UI.png)
 
 ### Installation
 
