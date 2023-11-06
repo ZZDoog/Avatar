@@ -1,5 +1,5 @@
 
-*.mp4
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -130,7 +130,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-*.mp4
+
 *.jpg
 *.pt
 *.pth
