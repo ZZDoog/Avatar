@@ -2,7 +2,7 @@
 
 Avatar is an easy-to-use system which can transfer your presentation video to a digital portrait with the input PPT and synthesis the final presentation video based on Gradio Framework.
 
-<video src="./image/demo.mp4" controls title="Title"></video>
+<video src=["./image/demo.mp4](https://github.com/ZZDoog/Avatar/blob/main/image/demo.mp4)" controls title="Title"></video>
 
 The illustration of Avatar as followed:
 
